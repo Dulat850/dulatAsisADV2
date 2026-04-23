@@ -19,13 +19,13 @@ jobs:
 
     - name: Build order-service
       run: |
-        cd order-service/cmd/order-service
-        go build -v -o ../../order-service-app
+        cd order-service
+        go build -v -o order-service-app ./cmd/order-service
 
     - name: Build payment-service
       run: |
-        cd payment-service/cmd/payment-service
-        go build -v -o ../../payment-service-app
+        cd payment-service
+        go build -v -o payment-service-app ./cmd/payment-service
 
     - name: Test order-service
       run: |
