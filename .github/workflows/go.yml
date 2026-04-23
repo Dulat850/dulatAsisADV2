@@ -9,9 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        service: [order-service, payment-service]
     steps:
     - uses: actions/checkout@v4
 
@@ -20,10 +17,22 @@ jobs:
       with:
         go-version: '1.20'
 
-    - name: Build ${{ matrix.service }}
-      run: go build -v ./...
-      working-directory: ./${{ matrix.service }}
+    - name: Build order-service
+      run: |
+        cd order-service/cmd/order-service
+        go build -v -o ../../order-service-app
 
-    - name: Test ${{ matrix.service }}
-      run: go test -v ./...
-      working-directory: ./${{ matrix.service }}
+    - name: Build payment-service
+      run: |
+        cd payment-service/cmd/payment-service
+        go build -v -o ../../payment-service-app
+
+    - name: Test order-service
+      run: |
+        cd order-service
+        go test -v ./...
+
+    - name: Test payment-service
+      run: |
+        cd payment-service
+        go test -v ./...
