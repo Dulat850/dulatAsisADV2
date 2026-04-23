@@ -1,61 +1,34 @@
 # Binaries
 *.exe
-*.exe~
 *.dll
 *.so
 *.dylib
-*.test
-*.out
+order-service/order-service
+payment-service/payment-service
 
-# Go workspace files
-*.mod
-*.sum
-go.work
-go.work.sum
+# Environment files
+.env
+.env.*
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 .DS_Store
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Build output
-/bin/
-/dist/
-/build/
-
-# Dependency directories
-vendor/
 
 # Logs
 *.log
-logs/
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Proto generated files
+# Generated proto files (можно не пушить)
 proto/gen/
 *.pb.go
-*.pb.gw.go
 
-# Binary files
-order-service/order-service
-payment-service/payment-service
+# Go build artifacts
+bin/
+dist/
+
+# Dependencies
+vendor/
 
 # Test coverage
 *.out
 *.cover
-coverage.html
-
-# Temporary files
-tmp/
-temp/
