@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "dulatAsisADV2/proto/gen/payment";
+
+service PaymentService {
+    rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+    rpc GetPaymentStatus(PaymentStatusRequest) returns (PaymentStatusResponse);
+    rpc StreamPayments(StreamPaymentsRequest) returns (stream PaymentUpdate);
+    rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+}
+
+message PaymentRequest {
+    string order_id = 1;
+    double amount = 2;
+    string currency = 3;
+}
+
+message PaymentResponse {
+    string payment_id = 1;
+    string order_id = 2;
+    string transaction_id = 3;
+    string status = 4;
+    string created_at = 5;  // Добавьте это поле
+}
+
+message PaymentStatusRequest {
+    string payment_id = 1;
+}
+
+message PaymentStatusResponse {
+    string payment_id = 1;
+    string status = 2;
+    double amount = 3;
+}
+
+message StreamPaymentsRequest {
+    string user_id = 1;
+}
+
+message PaymentUpdate {
+    string payment_id = 1;
+    string order_id = 2;
+    string status = 3;
+    double amount = 4;
+}
+
+message ListPaymentsRequest {
+    string status = 1;
+}
+
+message ListPaymentsResponse {
+    repeated PaymentResponse payments = 1;
+}

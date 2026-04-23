@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "dulatAsisADV2/proto/gen/order";
+
+service OrderService {
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+    rpc GetOrder(GetOrderRequest) returns (Order);
+    rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+}
+
+message CreateOrderRequest {
+    string user_id = 1;
+    repeated OrderItem items = 2;
+    double total_amount = 3;
+}
+
+message OrderItem {
+    string product_id = 1;
+    int32 quantity = 2;
+    double price = 3;
+}
+
+message CreateOrderResponse {
+    string order_id = 1;
+    string status = 2;
+}
+
+message GetOrderRequest {
+    string order_id = 1;
+}
+
+message Order {
+    string id = 1;
+    string user_id = 2;
+    repeated OrderItem items = 3;
+    double total_amount = 4;
+    string status = 5;
+    string created_at = 6;
+}
+
+message UpdateOrderStatusRequest {
+    string order_id = 1;
+    string status = 2;
+}
+
+message UpdateOrderStatusResponse {
+    bool success = 1;
+    string message = 2;
+}
